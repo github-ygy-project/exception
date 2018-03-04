@@ -3,7 +3,7 @@ package com.ygy.exception.handler;
 import com.ygy.exception.model.AbstractException;
 import com.ygy.exception.model.ExceptionParams;
 import com.ygy.exception.model.ResultBean;
-import com.ygy.exception.annotation.ExceptionHandler;
+import com.ygy.exception.annotation.YgyExceptionHandler;
 import com.ygy.exception.chain.ExceptionHandlerChain;
 import org.springframework.stereotype.Component;
 
@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
  * 自定义业务异常 统一处理异常
  */
 @Component
-@ExceptionHandler(order = "100")
-public class AbstractExceptionHandler implements com.ygy.exception.handler.ExceptionHandler {
+@YgyExceptionHandler(order = "100")
+public class AbstractYgyExceptionHandler implements ExceptionHandler {
 
     @Override
     public ResultBean handlerException(Exception e, ExceptionParams exceptionParams, ExceptionHandlerChain chain) {

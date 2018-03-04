@@ -1,6 +1,6 @@
 package com.ygy.exception.handler.listener;
 
-import com.ygy.exception.annotation.ExceptionHandler;
+import com.ygy.exception.annotation.YgyExceptionHandler;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -28,14 +28,14 @@ public class ExceptionHandlerListener implements ApplicationListener<ContextRefr
             String[] beanNames=context.getBeanNamesForType(Object.class);
             for (String beanName : beanNames) {
 
-                ExceptionHandler exceptionHandler=context.findAnnotationOnBean(beanName,
-                        ExceptionHandler.class);
+                YgyExceptionHandler ygyExceptionHandler=context.findAnnotationOnBean(beanName,
+                        YgyExceptionHandler.class);
                 //判断该类是否含有ErpExceptionHanler注解
-                if (exceptionHandler == null) {
+                if (ygyExceptionHandler == null) {
                     continue;
                 }
 
-                int index=getIndex(exceptionHandler.order(), orderList);
+                int index=getIndex(ygyExceptionHandler.order(), orderList);
                 if (index == -1) {
                     continue;
                 }
