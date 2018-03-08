@@ -26,7 +26,7 @@ public class ExceptionCodeHelper {
      * @return
      */
     public static String getUnknownCode(ModuleCodeEnum moduleCodeEnum) {
-        return getExceptionCode(ExceptionCodeEnum.UNKNOWN_CDOE, moduleCodeEnum, ExceptionSubCodeEnum.ERP_UNKNOWN_EXCEPTION.getCode());
+        return getExceptionCode(ExceptionCodeEnum.UNKNOWN_CDOE, moduleCodeEnum, ExceptionSubCodeEnum.UNKNOWN_EXCEPTION.getCode());
     }
 
     /**
@@ -66,7 +66,7 @@ public class ExceptionCodeHelper {
         }
 
         if (StringUtils.isEmpty(subCode)) {
-            subCode=ExceptionSubCodeEnum.ERP_UNKNOWN_EXCEPTION.getCode();
+            subCode=ExceptionSubCodeEnum.UNKNOWN_EXCEPTION.getCode();
         }
         return new StringBuilder().append(exceptionCodeEnum.getCode()).append(moduleCodeEnum.getCode()).append(subCode).toString();
 

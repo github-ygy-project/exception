@@ -1,6 +1,7 @@
 package com.ygy.exception.chain;
 
 
+import com.ygy.exception.enums.ExceptionSubCodeEnum;
 import com.ygy.exception.model.ExceptionParams;
 import com.ygy.exception.model.ResultBean;
 import com.ygy.exception.handler.ExceptionHandler;
@@ -36,7 +37,7 @@ public class ExceptionHandlerChain implements HandlerChain {
         }
 
         if (cursor >= handlers.size()) {
-            return ResultBean.ofError(exceptionParams,"系统异常,异常处理链路达到上限");
+            return ResultBean.ofError(exceptionParams, ExceptionSubCodeEnum.UNKNOWN_EXCEPTION.getMsg());
         }
 
 

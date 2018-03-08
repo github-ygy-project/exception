@@ -52,7 +52,7 @@ public class ResultBean<T> implements Serializable {
 
     public static ResultBean ofError(ExceptionParams exceptionParams) {
 
-        return ofError(exceptionParams, ExceptionSubCodeEnum.ERP_UNKNOWN_EXCEPTION.getMsg());
+        return ofError(exceptionParams, ExceptionSubCodeEnum.UNKNOWN_EXCEPTION.getMsg());
     }
 
     public static ResultBean ofError(ExceptionParams exceptionParams, String msg) {
@@ -69,12 +69,12 @@ public class ResultBean<T> implements Serializable {
 
 
     public static ResultBean ofError() {
-        return of(null,false, ExceptionCodeHelper.getExceptionCode(), ExceptionSubCodeEnum.ERP_UNKNOWN_EXCEPTION.getMsg());
+        return of(null,false, ExceptionCodeHelper.getExceptionCode(), ExceptionSubCodeEnum.UNKNOWN_EXCEPTION.getMsg());
     }
 
     public static <T> ResultBean of( T data, boolean success, String code, String msg) {
         if (StringUtils.isEmpty(msg)) {
-            msg=ExceptionSubCodeEnum.ERP_UNKNOWN_EXCEPTION.getMsg();
+            msg=ExceptionSubCodeEnum.UNKNOWN_EXCEPTION.getMsg();
         }
         if (StringUtils.isEmpty(code)) {
             code=ExceptionCodeHelper.getExceptionCode();
