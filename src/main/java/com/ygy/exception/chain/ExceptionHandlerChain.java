@@ -2,10 +2,11 @@ package com.ygy.exception.chain;
 
 
 import com.ygy.exception.enums.ExceptionSubCodeEnum;
+import com.ygy.exception.handler.ExceptionHandler;
+import com.ygy.exception.handler.container.ExceptionHandlerContainer;
+import com.ygy.exception.handler.listener.ExceptionHandlerListener;
 import com.ygy.exception.model.ExceptionParams;
 import com.ygy.exception.model.ResultBean;
-import com.ygy.exception.handler.ExceptionHandler;
-import com.ygy.exception.handler.listener.ExceptionHandlerListener;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -30,7 +31,7 @@ public class ExceptionHandlerChain implements HandlerChain {
     public ResultBean doHandler(Exception e, ExceptionParams exceptionParams) {
 
 
-        ArrayList<ExceptionHandler> handlers=exceptionHandlerListener.getHandlers();
+        ArrayList<ExceptionHandler> handlers=ExceptionHandlerContainer.getInstance().getHandlers();
 
         if (CollectionUtils.isEmpty(handlers)) {
             return ResultBean.ofError(exceptionParams);

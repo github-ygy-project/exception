@@ -1,6 +1,8 @@
 package com.ygy.exception.handler.listener;
 
 import com.ygy.exception.annotation.YgyExceptionHandler;
+import com.ygy.exception.handler.ExceptionHandler;
+import com.ygy.exception.handler.container.ExceptionHandlerContainer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -16,10 +18,10 @@ import java.util.ArrayList;
 @Component
 public class ExceptionHandlerListener implements ApplicationListener<ContextRefreshedEvent> {
 
-    private final ArrayList<com.ygy.exception.handler.ExceptionHandler> handlers=new ArrayList();
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
+        ExceptionHandlerContainer container=ExceptionHandlerContainer.getInstance();
         try {
             ArrayList<Long> orderList=new ArrayList<Long>();
             // 获取上下文
@@ -40,21 +42,18 @@ public class ExceptionHandlerListener implements ApplicationListener<ContextRefr
                     continue;
                 }
 
-               com.ygy.exception.handler.ExceptionHandler handler=(com.ygy.exception.handler.ExceptionHandler) context.getBean(beanName);
+                ExceptionHandler handler=(ExceptionHandler) context.getBean(beanName);
                 //最多只能有30个执行链路
-                if (handlers.size() > 30) {
+                if (container.getSize() > 30){
                     break;
                 }
-                handlers.add(index,handler);
+                container.addHandler(index, handler);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public ArrayList<com.ygy.exception.handler.ExceptionHandler> getHandlers() {
-        return handlers;
-    }
 
     public  int getIndex(String order, ArrayList<Long> orderList) {
         Long orderNum = null ;
