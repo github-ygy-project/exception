@@ -24,10 +24,6 @@ public class ExceptionHandlerChain implements HandlerChain {
 
     private int cursor=0;
 
-    @Resource
-    ExceptionHandlerListener exceptionHandlerListener;
-
-
     public ResultBean doHandler(Exception e, ExceptionParams exceptionParams) {
 
 
